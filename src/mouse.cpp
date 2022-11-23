@@ -414,14 +414,12 @@ void GraphicsWindow::MouseMoved(double x, double y, bool leftDown,
         }
         case Pending::DRAGGING_NEW_RADIUS:
         case Pending::DRAGGING_RADIUS: {
-
-            const Camera &camera = canvas->GetCamera();
             Canvas::Stroke strokeError = Style::Stroke(Style::CONSTRAINT);
             strokeError.layer = Canvas::Layer::FRONT;
             strokeError.width = 1.0;
             Canvas::hStroke hcsDim = canvas->GetStroke(strokeError);
 
-            double textHeight = Style::DefaultTextHeight() / camera.scale * 0.25f;
+            double textHeight = Style::DefaultTextHeight() / scale;
 
 
             Entity *circle = SK.GetEntity(pending.circle);
@@ -433,7 +431,7 @@ void GraphicsWindow::MouseMoved(double x, double y, bool leftDown,
 
             canvas->DrawVectorText(ssprintf("%lf", r),
                                    textHeight,
-                                   center, camera.projRight, camera.projUp,
+                                   center, projRight, projUp,
                                    hcsDim);
 
 
